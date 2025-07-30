@@ -44,12 +44,12 @@ jobs:
           TAG="auto-${{ steps.record_start.outputs.start_time }}_${{ steps.record_end.outputs.end_time }}"
           echo "tag_name=$TAG" >> $GITHUB_OUTPUT
 
-      - name: Zip output folders
-        working-directory: source-repo
-        run: |
-          mkdir -p ../release
-          zip -r ../release/csv_orderbooks_exchange.zip csv_orderbooks_exchange || echo "⚠️ csv_orderbooks_exchange 不存在"
-          zip -r ../release/csv_orderbooks_symbol.zip csv_orderbooks_symbol || echo "⚠️ csv_orderbooks_symbol 不存在"
+      # - name: Zip output folders
+      #   working-directory: source-repo
+      #   run: |
+      #     mkdir -p ../release
+      #     zip -r ../release/csv_orderbooks_exchange.zip csv_orderbooks_exchange || echo "⚠️ csv_orderbooks_exchange 不存在"
+      #     zip -r ../release/csv_orderbooks_symbol.zip csv_orderbooks_symbol || echo "⚠️ csv_orderbooks_symbol 不存在"
 
       - name: Upload to swujing822/target Release
         uses: softprops/action-gh-release@v2
@@ -62,7 +62,6 @@ jobs:
             开始：${{ steps.record_start.outputs.start_time }}  
             结束：${{ steps.record_end.outputs.end_time }}
           files: |
-            release/csv_orderbooks_exchange.zip
-            release/csv_orderbooks_symbol.zip
+            src/csv_orderbooks_*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
