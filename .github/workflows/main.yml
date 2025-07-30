@@ -35,13 +35,11 @@ jobs:
           python watch_orderbooks.py
 
       - name: 🧭 List files in source-repo/src
-        working-directory: source-repo/src
         run: |
           echo "📁 当前路径:"
           pwd
-
           echo "📄 文件列表:"
-          ls -al
+          ls -al source-repo/src
 
       - name: 🕓 Record end time
         id: record_end
@@ -59,12 +57,12 @@ jobs:
           repository: swujing822/target
           tag_name: ${{ steps.set_tag.outputs.tag_name }}
           name: Release ${{ steps.set_tag.outputs.tag_name }}
-          working-directory: source-repo/src
           body: |
             自动执行时间范围：  
             开始：${{ steps.record_start.outputs.start_time }}  
             结束：${{ steps.record_end.outputs.end_time }}
           files: |
-            *.zip
+            source-repo/src/csv_orderbooks_exchange_*.zip
+            source-repo/src/csv_orderbooks_symbol_*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
