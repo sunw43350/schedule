@@ -57,11 +57,12 @@ jobs:
           repository: swujing822/target
           tag_name: ${{ steps.set_tag.outputs.tag_name }}
           name: Release ${{ steps.set_tag.outputs.tag_name }}
+          working-directory: source-repo
           body: |
             自动执行时间范围：  
             开始：${{ steps.record_start.outputs.start_time }}  
             结束：${{ steps.record_end.outputs.end_time }}
           files: |
-            ./csv_orderbooks_*.zip
+            src/csv_orderbooks_*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
