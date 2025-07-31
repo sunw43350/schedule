@@ -2,7 +2,7 @@ name: Auto Release csv_orderbooks (every 4 hours)
 
 on:
   schedule:
-    - cron: '0 */4 * * *'  # 每 4 小时 UTC 执行一次
+    - cron: '0 */2 * * *'  # 每 2 小时 UTC 执行一次
   workflow_dispatch:
 
 jobs:
